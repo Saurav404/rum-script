@@ -1,5 +1,5 @@
 /* created at 2022-11-23 12:44:32 by rumvision.com; served latest instead */
-(function () {
+!(function () {
   function uuidv1() {
     function t() {
       return e ? 15 & e[n++] : (16 * Math.random()) | 0;
