@@ -118,7 +118,7 @@
       };
     }
     if (
-      _beacon.domain_string.indexOf("localhost:3000/homepage") < 0 ||
+      _beacon.domain_string.indexOf("another-app.vercel.app") < 0 ||
       !shouldTrack()
     ) {
       toStorage();
@@ -662,7 +662,7 @@
           elm = attr.largestShiftTarget;
           debugger;
           break;
-        case "FID": 
+        case "FID":
         case "INP":
           elm = attr.eventTarget;
           debugger;
@@ -826,9 +826,9 @@
       )),
         _data.events.push(evnt);
     }
-    // if (!_storage.submitted) {
-    //   return false;
-    // }
+    if (!_storage.submitted) {
+      return false;
+    }
     if (Object.keys(_metrics.data).length == 0 && _data.events.length == 0) {
       return false;
     }
