@@ -118,7 +118,7 @@
       };
     }
     if (
-      _beacon.domain_string.indexOf("http://localhost:3000/homepage") < 0 ||
+      _beacon.domain_string.indexOf("localhost:3000/homepage") < 0 ||
       !shouldTrack()
     ) {
       toStorage();
