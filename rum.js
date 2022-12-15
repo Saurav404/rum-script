@@ -57,7 +57,7 @@
     _config = {
       ablock: {},
       pageloaded: false,
-      endpoint: "http://127.0.0.1:5500/index.html",
+      endpoint: "http:www.google.com",
       timer: {
         obj: null,
         ms: 100,
@@ -118,7 +118,7 @@
       };
     }
     if (
-      _beacon.domain_string.indexOf("another-app.vercel.app") < 0 ||
+      _beacon.domain_string.indexOf("another-app.vercel.app/homepage") < 0 ||
       !shouldTrack()
     ) {
       toStorage();
