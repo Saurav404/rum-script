@@ -1,5 +1,4 @@
-/* created at 2022-11-23 12:44:32 by rumvision.com; served latest instead */
-(function () {
+!(function () {
   function uuidv1() {
     function t() {
       return e ? 15 & e[n++] : (16 * Math.random()) | 0;
@@ -58,7 +57,7 @@
     _config = {
       ablock: {},
       pageloaded: false,
-      endpoint: `https://www.hostedhooks.com/api/v1/apps/21e04a79-d5a5-4e42-8aab-610ac280557e/messages`,
+      endpoint: "http://127.0.0.1:5500/index.html",
       timer: {
         obj: null,
         ms: 100,
@@ -89,7 +88,7 @@
       return false;
     }
     if (!_config.data.webvitals) {
-      return type == "webvitals" ? 0 : 0;
+      return type == "webvitals" ? 1 : 0;
     }
     if (1 && _storage.urls.absolute && !_config.page?.track) {
       _config.page = urlRegexp(_storage.urls, _beacon.url_string);
@@ -118,7 +117,10 @@
         match: [],
       };
     }
-    if (_beacon.domain_string.indexOf("gufum.com") < 0 || !shouldTrack()) {
+    if (
+      _beacon.domain_string.indexOf("another-app.vercel.app/homepage") < 0 ||
+      !shouldTrack()
+    ) {
       toStorage();
       return 0;
     }
@@ -654,13 +656,16 @@
             );
           }
           set(prefix + "ttfbdelta", Math.round(attr.firstByteToFCP));
+          debugger;
           break;
         case "CLS":
           elm = attr.largestShiftTarget;
+          debugger;
           break;
-        case "FID":
+        case "FID": 
         case "INP":
           elm = attr.eventTarget;
+          debugger;
           break;
         case "LCP":
           elm = attr.element;
@@ -718,6 +723,7 @@
             }
           }
           set(prefix + "elmtype", elmType);
+          debugger;
           break;
         case "TTFB":
           var ttfb = {
@@ -738,6 +744,7 @@
           for (const k in ttfb) {
             set(prefix + k, Math.round(ttfb[k]));
           }
+          debugger;
           break;
       }
       if (elm) {
@@ -762,20 +769,21 @@
     throttleSend();
   }
 
-  function send(obj) {
-    var body = JSON.stringify(obj);
-    const headers = {
-      "Content-type": "application/json",
-      Authorization: `Bearer g22x2mQnHMPDRJ99hdjeD9pm`,
-    };
-    (nr.sendBeacon && nr.sendBeacon(_config.endpoint, body)) ||
-      fetch(_config.endpoint, {
-        body: { data: { body }, version: "1.0", event_type: "metric.event" },
-        method: "POST",
-        headers: { headers },
-        keepalive: true,
-      });
-  }
+  //   function send(obj) {
+  //     var body = JSON.stringify(obj);
+  //     // const headers = {
+  //     //   "Content-type": "application/json",
+  //     //   Authorization: "Bearer g22x2mQnHMPDRJ99hdjeD9pm",
+  //     // };
+  //     (nr.sendBeacon && nr.sendBeacon(_config.endpoint, body)) ||
+  //       fetch(_config.endpoint, {
+  //         body: body,
+  //         // body: { data: { body }, version: "1.0", event_type: "metric.event" },
+  //         method: "POST",
+  //         // headers: { headers },
+  //         keepalive: true,
+  //       });
+  //   }
 
   function construct(callback) {
     var tables = ["session", "request"],
@@ -795,7 +803,6 @@
     if (Object.keys(_metrics.data).length > 0) {
       beacon.inserts.push(_metrics);
     }
-    console.log(beacon);
     send(beacon);
     _data.request.data = {
       id: _beacon.request_id,
@@ -819,9 +826,9 @@
       )),
         _data.events.push(evnt);
     }
-    if (!_storage.submitted) {
-      return false;
-    }
+    // if (!_storage.submitted) {
+    //   return false;
+    // }
     if (Object.keys(_metrics.data).length == 0 && _data.events.length == 0) {
       return false;
     }
