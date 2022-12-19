@@ -57,7 +57,7 @@
     _config = {
       ablock: {},
       pageloaded: false,
-      endpoint: "http:www.google.com",
+      endpoint: `https://www.hostedhooks.com/api/v1/apps/21e04a79-d5a5-4e42-8aab-610ac280557e/messages`,
       timer: {
         obj: null,
         ms: 100,
@@ -118,7 +118,7 @@
       };
     }
     if (
-      _beacon.domain_string.indexOf("another-app.vercel.app") < 0 ||
+      _beacon.domain_string.indexOf("http://localhost:3000/login") < 0 ||
       !shouldTrack()
     ) {
       toStorage();
@@ -543,11 +543,14 @@
     if (!_config.data.consent && !_config.data.consent_storage) {
       return;
     }
+
     if (_config.data.dnt) {
       _storage.urls = {};
     }
+
     var clone = copy(_storage);
     sessionStorage.setItem(_ns, JSON.stringify(clone));
+
     if (localStorage.getItem(_ns) === null) {
       localStorage.setItem(_ns, new Date().getTime());
     }
@@ -613,15 +616,19 @@
   function submitRum(metric) {
     _config.data.callback && cb(_config.data.callback, metric);
     var navType = (metric.navigationType || "navigate").replace(/-/g, "_");
-    if (
-      !_config.bf.navigationtype ||
-      _config.bf.navigationtype.val != navType
-    ) {
-      set("navigationtype", navType);
-      if (navType == "back_forward_cache") {
-        bfcache();
-      }
-    }
+    // if (
+    //   !_config.bf.navigationtype ||
+    //   _config.bf.navigationtype.val != navType
+    // ) {
+    //   set("navigationtype", navType);
+    //   debugger
+    //   if (navType == "back_forward_cache") {
+    //     bfcache();
+    //   }
+    // }
+    set("navigationtype", navType);
+    bfcache();
+
     if (!shouldTrack("webvitals")) {
       return;
     }
@@ -656,16 +663,13 @@
             );
           }
           set(prefix + "ttfbdelta", Math.round(attr.firstByteToFCP));
-          debugger;
           break;
         case "CLS":
           elm = attr.largestShiftTarget;
-          debugger;
           break;
         case "FID":
         case "INP":
           elm = attr.eventTarget;
-          debugger;
           break;
         case "LCP":
           elm = attr.element;
@@ -723,7 +727,6 @@
             }
           }
           set(prefix + "elmtype", elmType);
-          debugger;
           break;
         case "TTFB":
           var ttfb = {
@@ -744,7 +747,6 @@
           for (const k in ttfb) {
             set(prefix + k, Math.round(ttfb[k]));
           }
-          debugger;
           break;
       }
       if (elm) {
@@ -769,21 +771,25 @@
     throttleSend();
   }
 
-  //   function send(obj) {
-  //     var body = JSON.stringify(obj);
-  //     // const headers = {
-  //     //   "Content-type": "application/json",
-  //     //   Authorization: "Bearer g22x2mQnHMPDRJ99hdjeD9pm",
-  //     // };
-  //     (nr.sendBeacon && nr.sendBeacon(_config.endpoint, body)) ||
-  //       fetch(_config.endpoint, {
-  //         body: body,
-  //         // body: { data: { body }, version: "1.0", event_type: "metric.event" },
-  //         method: "POST",
-  //         // headers: { headers },
-  //         keepalive: true,
-  //       });
-  //   }
+  async function send(obj) {
+    debugger;
+    const value = { data: obj };
+    value["version"] = "4.0";
+    value["event_type"] = "metric.event";
+    var body = JSON.stringify(value);
+    const headers = {
+      "Content-type": "application/json; charset=UTF-8",
+      Authorization: "Bearer g22x2mQnHMPDRJ99hdjeD9pm",
+    };
+    // (nr.sendBeacon && nr.sendBeacon(_config.endpoint, body)) ||
+    const data = await fetch(_config.endpoint, {
+      body: body,
+      method: "POST",
+      headers: headers,
+      keepalive: true,
+    });
+    console.log(data);
+  }
 
   function construct(callback) {
     var tables = ["session", "request"],
@@ -826,9 +832,10 @@
       )),
         _data.events.push(evnt);
     }
-    if (!_storage.submitted) {
-      return false;
-    }
+    // if (!_storage.submitted) {
+    //   return false;
+    // }
+
     if (Object.keys(_metrics.data).length == 0 && _data.events.length == 0) {
       return false;
     }
