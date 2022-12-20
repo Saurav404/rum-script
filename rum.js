@@ -106,6 +106,7 @@
   }
 
   function startSession() {
+    debugger
     if (!_storage.urls) {
       _storage.samplingrate = 100;
       _storage.urls = {
@@ -118,7 +119,7 @@
       };
     }
     if (
-      _beacon.domain_string.indexOf("http://localhost:3000/login") < 0 ||
+      _beacon.domain_string.indexOf("rum-nextjs-project.vercel.app") < 0 ||
       !shouldTrack()
     ) {
       toStorage();
@@ -616,18 +617,17 @@
   function submitRum(metric) {
     _config.data.callback && cb(_config.data.callback, metric);
     var navType = (metric.navigationType || "navigate").replace(/-/g, "_");
-    // if (
-    //   !_config.bf.navigationtype ||
-    //   _config.bf.navigationtype.val != navType
-    // ) {
-    //   set("navigationtype", navType);
-    //   debugger
-    //   if (navType == "back_forward_cache") {
-    //     bfcache();
-    //   }
-    // }
-    set("navigationtype", navType);
-    bfcache();
+    if (
+      !_config.bf.navigationtype ||
+      _config.bf.navigationtype.val != navType
+    ) {
+      set("navigationtype", navType);
+      debugger
+      // if (navType == "back_forward_cache") {
+      //   bfcache();
+      // }
+      bfcache();
+    }
 
     if (!shouldTrack("webvitals")) {
       return;
