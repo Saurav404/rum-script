@@ -113,11 +113,7 @@
       debugger;
       _storage.samplingrate = 100;
       _storage.urls = {
-        absolute: {
-          "/": {
-            type: "home.homepage",
-          },
-        },
+        absolute: { "/": { type: "home" }, "/homepage": { type: "homepage" } },
         match: [],
       };
     }
