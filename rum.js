@@ -92,12 +92,11 @@
     }
     if (1 && _storage.urls.absolute && !_config.page?.track) {
       _config.page = urlRegexp(_storage.urls, _beacon.url_string);
-      debugger
+      debugger;
       _storage.regex = urlRegexp.toString();
     }
     debugger;
     if (!_config.page) {
-      debugger
       _config.page = {};
     }
     set("webvitals", _config.page.track || 0, "config");
@@ -109,13 +108,16 @@
   }
 
   function startSession() {
-    debugger
+    debugger;
     if (!_storage.urls) {
       _storage.samplingrate = 100;
       _storage.urls = {
         absolute: {
           "/": {
             type: "home",
+          },
+          "/homepage": {
+            type: "homepage",
           },
         },
         match: [],
@@ -625,11 +627,11 @@
       _config.bf.navigationtype.val != navType
     ) {
       set("navigationtype", navType);
-      debugger
+      debugger;
       if (navType == "back_forward_cache") {
         bfcache();
       }
-      debugger
+      debugger;
       // bfcache();
     }
 
