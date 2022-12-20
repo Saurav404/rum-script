@@ -165,6 +165,7 @@
     } else {
       for (const sub in urls.match) {
         var url = urls.match[sub];
+        debugger
         if (
           (!url.regexp && doc.querySelector(sub)) ||
           (url.regexp && path.match(sub))
