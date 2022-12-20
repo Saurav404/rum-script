@@ -92,10 +92,8 @@
     }
     if (1 && _storage.urls.absolute && !_config.page?.track) {
       _config.page = urlRegexp(_storage.urls, _beacon.url_string);
-      debugger;
       _storage.regex = urlRegexp.toString();
     }
-    debugger;
     if (!_config.page) {
       _config.page = {};
     }
@@ -108,9 +106,7 @@
   }
 
   function startSession() {
-    debugger;
     if (!_storage.urls) {
-      debugger;
       _storage.samplingrate = 100;
       _storage.urls = {
         absolute: { "/": { type: "home" }, "/homepage": { type: "homepage" } },
@@ -621,11 +617,9 @@
       _config.bf.navigationtype.val != navType
     ) {
       set("navigationtype", navType);
-      debugger;
       if (navType == "back_forward_cache") {
         bfcache();
       }
-      debugger;
       // bfcache();
     }
 
@@ -772,7 +766,6 @@
   }
 
   async function send(obj) {
-    debugger;
     const value = { data: obj };
     value["version"] = "4.0";
     value["event_type"] = "metric.event";
