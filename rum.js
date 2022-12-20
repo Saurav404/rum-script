@@ -623,10 +623,11 @@
     ) {
       set("navigationtype", navType);
       debugger
-      // if (navType == "back_forward_cache") {
-      //   bfcache();
-      // }
-      bfcache();
+      if (navType == "back_forward_cache") {
+        bfcache();
+      }
+      debugger
+      // bfcache();
     }
 
     if (!shouldTrack("webvitals")) {
