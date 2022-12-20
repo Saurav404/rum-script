@@ -110,6 +110,7 @@
   function startSession() {
     debugger;
     if (!_storage.urls) {
+      debugger;
       _storage.samplingrate = 100;
       _storage.urls = {
         absolute: {
