@@ -1,4 +1,4 @@
-!(function () {
+/* created at 2022-12-20 09:13:42 by rumvision.com; served latest instead */ !(function () {
   function uuidv1() {
     function t() {
       return e ? 15 & e[n++] : (16 * Math.random()) | 0;
@@ -30,24 +30,13 @@
   const _ns = "rumv",
     _am = "ttfb_metric_",
     _ua = nr.userAgent,
-    _js = dt.currentScript || {
-      dataset: {},
-    },
+    _js = dt.currentScript || { dataset: {} },
     _nav = pe.getEntriesByType("navigation")[0];
   var _dnt = nr.doNotTrack || ww.doNotTrack || undefined,
-    _data = {
-      session: {},
-      request: {},
-      events: [],
-    },
-    _required = {
-      device_type: ["desktop", "tablet", "mobile"],
-    },
+    _data = { session: {}, request: {}, events: [] },
+    _required = { device_type: ["desktop", "tablet", "mobile"] },
     _storage = ww[_ns].storage || {},
-    _metrics = {
-      type: "metric",
-      data: {},
-    },
+    _metrics = { type: "metric", data: {} },
     _beacon = {
       domain_tag: "2F7D77C9C7",
       domain_string: wn.hostname,
@@ -57,11 +46,9 @@
     _config = {
       ablock: {},
       pageloaded: false,
-      endpoint: `https://www.hostedhooks.com/api/v1/apps/21e04a79-d5a5-4e42-8aab-610ac280557e/messages`,
-      timer: {
-        obj: null,
-        ms: 100,
-      },
+      endpoint:
+        "https://www.hostedhooks.com/api/v1/apps/21e04a79-d5a5-4e42-8aab-610ac280557e/messages",
+      timer: { obj: null, ms: 100 },
       bf: {},
       errors: {},
       data: {
@@ -82,13 +69,12 @@
       : 0;
   _config.data.dnt = !0 && _dnt === 1;
   _config.page = _storage.page || {};
-
   function shouldTrack(type) {
     if (_config.data.dnt) {
       return false;
     }
     if (!_config.data.webvitals) {
-      return type == "webvitals" ? 1 : 0;
+      return type == "webvitals" ? 0 : 0;
     }
     if (1 && _storage.urls.absolute && !_config.page?.track) {
       _config.page = urlRegexp(_storage.urls, _beacon.url_string);
@@ -104,7 +90,6 @@
         : 0 || _config.data.webvitals;
     return response;
   }
-
   function startSession() {
     if (!_storage.urls) {
       _storage.samplingrate = 100;
@@ -130,10 +115,7 @@
     }
     _data.session = {
       type: "session",
-      data: {
-        id: _storage.session_id,
-        platformid: 0,
-      },
+      data: { id: _storage.session_id, platformid: 7 },
     };
     var prefers = {};
     if (_config.data.consent || _config.data.consent_device || false) {
@@ -175,11 +157,8 @@
     }
     return 1;
   }
-
   function urlRegexp(urls, path) {
-    var result = urls.absolute[path] || {
-        type: false,
-      },
+    var result = urls.absolute[path] || { type: false },
       doc = document;
     if (result.type) {
       result.track = 1;
@@ -208,19 +187,10 @@
     }
     return result;
   }
-
   function collectTransferSize(pageload) {
-    let startEnd = {
-      start: -1,
-      end: -1,
-    };
+    let startEnd = { start: -1, end: -1 };
     let data = {
-      map: {
-        prefix: "fcp",
-        data: {
-          renderblocking: {},
-        },
-      },
+      map: { prefix: "fcp", data: { renderblocking: {} } },
       ms: {
         prefix: "fcp",
         divide: 1,
@@ -231,28 +201,14 @@
           thirdparties: 0,
         },
       },
-      kb: {
-        divide: 1024,
-        data: {
-          total: 0,
-          html: _nav.transferSize,
-        },
-      },
+      kb: { divide: 1024, data: { total: 0, html: _nav.transferSize } },
     };
     let cdnRegexp1 = "";
     let cdnRegexp2 = "";
     let trackType = {
-      link: {
-        ext: ".css",
-        type: "css",
-      },
-      script: {
-        ext: ".js",
-        type: "script",
-      },
-      img: {
-        type: "img",
-      },
+      link: { ext: ".css", type: "css" },
+      script: { ext: ".js", type: "script" },
+      img: { type: "img" },
     };
     var resourceEntries = pe.getEntriesByType("resource");
     for (let i = 0; i < resourceEntries.length; i++) {
@@ -300,19 +256,16 @@
       }
     }
   }
-
   function cb(func, arg) {
     (typeof func === "function" && func(arg)) ||
       (typeof func === "string" && ww[func](arg));
   }
-
   function get(key, callback) {
     if (key in _config.bf && _config.bf[key].val) {
       return _config.bf[key];
     }
     return key ? null : _config.bf;
   }
-
   function set(key, value, table, force) {
     if (key.indexOf("cls_metric") === 0) {
       key = key.replace("cls_", "clsfloat_");
@@ -324,10 +277,7 @@
     var table = ["session", "config", "metric"].includes(table)
       ? table
       : "request";
-    _config.bf[key] = {
-      val: value,
-      table: table,
-    };
+    _config.bf[key] = { val: value, table: table };
     if (table == "metric") {
       return (_metrics.data[key] = value);
     }
@@ -342,7 +292,6 @@
     }
     return;
   }
-
   function getPvt() {
     var cs = 0;
     if (_config.data.consent || _config.data.consent_storage || false) {
@@ -365,7 +314,6 @@
     }
     return "unique";
   }
-
   function pagehit() {
     var navCon = nr.connection || {};
     var tmpData = {
@@ -403,7 +351,6 @@
       submitData();
     }
   }
-
   function loopQueue() {
     for (var d in _js.dataset) {
       _config.data[d.replace(/[\W_]+/g, "-")] = _js.dataset[d];
@@ -415,10 +362,7 @@
       }
     }
   }
-  _data.request = {
-    type: "request",
-    data: {},
-  };
+  _data.request = { type: "request", data: {} };
   if (startSession()) {
     loopQueue();
     if (_config.data.auto) {
@@ -446,9 +390,7 @@
       if (nr.userAgentData) {
         var ua = nr.userAgentData;
         if (ua.brands.length) {
-          var browser = {
-            brand: "",
-          };
+          var browser = { brand: "" };
           for (var i = 0; i < ua.brands.length; i++) {
             if (
               ua.brands[i].brand.indexOf("Brand") < 0 &&
@@ -526,32 +468,25 @@
     }
     construct();
   }
-
   function snakeCase(str) {
     return str.replace(/([a-z])([A-Z])/g, "$1_$2").toLowerCase();
   }
-
   function copy(obj, append) {
     return Object.assign({}, obj, append);
   }
-
   function toStorage() {
     if (!_config.data.consent && !_config.data.consent_storage) {
       return;
     }
-
     if (_config.data.dnt) {
       _storage.urls = {};
     }
-
     var clone = copy(_storage);
     sessionStorage.setItem(_ns, JSON.stringify(clone));
-
     if (localStorage.getItem(_ns) === null) {
       localStorage.setItem(_ns, new Date().getTime());
     }
   }
-
   function getBrowser(ua) {
     if (_config.data.consent == 0 || _config.data.consent_useragent == 0) {
       return [];
@@ -601,14 +536,12 @@
     }
     return [wv, M[0], M[1], pf];
   }
-
   function bfcache() {
     set("start", pe.now(), "config");
     set("navigationtype", "back_forward_cache", "request", 1);
     loopQueue();
     pagehit();
   }
-
   function submitRum(metric) {
     _config.data.callback && cb(_config.data.callback, metric);
     var navType = (metric.navigationType || "navigate").replace(/-/g, "_");
@@ -620,9 +553,7 @@
       if (navType == "back_forward_cache") {
         bfcache();
       }
-      // bfcache();
     }
-
     if (!shouldTrack("webvitals")) {
       return;
     }
@@ -764,7 +695,6 @@
     }
     throttleSend();
   }
-
   async function send(obj) {
     const value = { data: obj };
     value["version"] = "4.0";
@@ -786,9 +716,7 @@
 
   function construct(callback) {
     var tables = ["session", "request"],
-      beacon = copy(_beacon, {
-        inserts: [],
-      });
+      beacon = copy(_beacon, { inserts: [] });
     if (_storage.submitted) {
       tables.shift();
     }
@@ -803,12 +731,8 @@
       beacon.inserts.push(_metrics);
     }
     send(beacon);
-    _data.request.data = {
-      id: _beacon.request_id,
-    };
-    _data.session.data = {
-      id: _beacon.session_id,
-    };
+    _data.request.data = { id: _beacon.request_id };
+    _data.session.data = { id: _beacon.session_id };
     if (!_storage.submitted) {
       _storage.submitted = _beacon.session_id;
       toStorage();
@@ -816,7 +740,6 @@
     _metrics.data = {};
     _config.data.callback && cb(_config.data.callback);
   }
-
   function throttleSend(evnt, callback) {
     if (evnt) {
       evnt.id = uuidv1();
@@ -825,10 +748,9 @@
       )),
         _data.events.push(evnt);
     }
-    // if (!_storage.submitted) {
-    //   return false;
-    // }
-
+    if (!_storage.submitted) {
+      return false;
+    }
     if (Object.keys(_metrics.data).length == 0 && _data.events.length == 0) {
       return false;
     }
@@ -843,7 +765,6 @@
       construct(callback);
     }, _config.timer.ms);
   }
-
   function deleteEmpty(object) {
     var result = {};
     for (var key in object) {
@@ -854,7 +775,6 @@
     }
     return result;
   }
-
   var webVitals = (function (e) {
     "use strict";
     var t,
@@ -952,16 +872,7 @@
               t(e.getEntries());
             });
             return (
-              r.observe(
-                Object.assign(
-                  {
-                    type: e,
-                    buffered: !0,
-                  },
-                  n || {}
-                )
-              ),
-              r
+              r.observe(Object.assign({ type: e, buffered: !0 }, n || {})), r
             );
           }
         } catch (e) {}
@@ -1056,10 +967,7 @@
       },
       b = !1,
       w = -1,
-      L = {
-        passive: !0,
-        capture: !0,
-      },
+      L = { passive: !0, capture: !0 },
       F = new Date(),
       M = function (e, i) {
         t || ((t = i), (n = e), (r = new Date()), I(removeEventListener), A());
@@ -1179,11 +1087,7 @@
           if (n)
             n.entries.push(e), (n.latency = Math.max(n.latency, e.duration));
           else {
-            var r = {
-              id: e.interactionId,
-              latency: e.duration,
-              entries: [e],
-            };
+            var r = { id: e.interactionId, latency: e.duration, entries: [e] };
             (j[r.id] = r), _.push(r);
           }
           _.sort(function (e, t) {
@@ -1218,15 +1122,10 @@
               n.latency !== i.value &&
               ((i.value = n.latency), (i.entries = n.entries), r());
           },
-          o = p("event", a, {
-            durationThreshold: t.durationThreshold || 40,
-          });
+          o = p("event", a, { durationThreshold: t.durationThreshold || 40 });
         (r = g(e, i, n, t.reportAllChanges)),
           o &&
-            (o.observe({
-              type: "first-input",
-              buffered: !0,
-            }),
+            (o.observe({ type: "first-input", buffered: !0 }),
             h(function () {
               a(o.takeRecords()),
                 i.value < 0 && O() > 0 && ((i.value = 0), (i.entries = [])),
@@ -1440,10 +1339,7 @@
                 (o(u.takeRecords()), u.disconnect(), (z[a.id] = !0), n(!0));
             };
             ["keydown", "click"].forEach(function (e) {
-              addEventListener(e, c, {
-                once: !0,
-                capture: !0,
-              });
+              addEventListener(e, c, { once: !0, capture: !0 });
             }),
               h(c, !0),
               l(function (i) {
@@ -1525,9 +1421,7 @@
             e(t);
         }, t);
       }),
-      Object.defineProperty(e, "__esModule", {
-        value: !0,
-      }),
+      Object.defineProperty(e, "__esModule", { value: !0 }),
       e
     );
   })({});
