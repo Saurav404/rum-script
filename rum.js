@@ -115,10 +115,7 @@
       _storage.urls = {
         absolute: {
           "/": {
-            type: "home",
-          },
-          "/homepage": {
-            type: "homepage",
+            type: "home.homepage",
           },
         },
         match: [],
