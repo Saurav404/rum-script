@@ -94,9 +94,11 @@
       _config.page = urlRegexp(_storage.urls, _beacon.url_string);
       _storage.regex = urlRegexp.toString();
     }
+    debugger;
     if (!_config.page) {
       _config.page = {};
     }
+    debugger;
     set("webvitals", _config.page.track || 0, "config");
     var response =
       type == "webvitals"
