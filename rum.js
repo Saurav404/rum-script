@@ -95,7 +95,7 @@
       _storage.samplingrate = 100;
       _storage.urls = {
         absolute: { "/": { type: "home" }, "/login": { type: "login" } },
-        match: [{ "another-app.vercel.app/": { regexp: 1, type: "pages" } }],
+        match: { "another-app.vercel.app/": { regexp: 1, type: "pages" } },
       };
     }
     if (
