@@ -77,7 +77,6 @@
       return type == "webvitals" ? 0 : 0;
     }
     if (1 && _storage.urls.absolute && !_config.page?.track) {
-      debugger
       _config.page = urlRegexp(_storage.urls, _beacon.url_string);
       _storage.regex = urlRegexp.toString();
     }
@@ -95,7 +94,7 @@
     if (!_storage.urls) {
       _storage.samplingrate = 100;
       _storage.urls = {
-        absolute: { "/": { type: "home" }, "/login": { type: "login" } },
+        absolute: { "/": { type: "home" } },
         match: { "/": { regexp: 1, type: "pages" } },
       };
     }
@@ -166,7 +165,7 @@
     } else {
       for (const sub in urls.match) {
         var url = urls.match[sub];
-        debugger;
+
         if (
           (!url.regexp && doc.querySelector(sub)) ||
           (url.regexp && path.match(sub))
