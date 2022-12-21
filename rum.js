@@ -102,7 +102,7 @@
       };
     }
     if (
-      _beacon.domain_string.indexOf("another-app.vercel.app") < 0 ||
+      _beacon.domain_string.indexOf("rum-nextjs-project.vercel.app") < 0 ||
       !shouldTrack()
     ) {
       toStorage();
