@@ -95,7 +95,7 @@
       _storage.samplingrate = 100;
       _storage.urls = {
         absolute: { "/": { type: "home" }, "/login": { type: "login" } },
-        match: { "another-app.vercel.app": { regexp: 1, type: "pages" } },
+        match: [{ "another-app.vercel.app/": { regexp: 1, type: "pages" } }],
       };
     }
     if (
@@ -165,7 +165,7 @@
     } else {
       for (const sub in urls.match) {
         var url = urls.match[sub];
-        debugger
+        debugger;
         if (
           (!url.regexp && doc.querySelector(sub)) ||
           (url.regexp && path.match(sub))
