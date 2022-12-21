@@ -77,6 +77,7 @@
       return type == "webvitals" ? 0 : 0;
     }
     if (1 && _storage.urls.absolute && !_config.page?.track) {
+      debugger
       _config.page = urlRegexp(_storage.urls, _beacon.url_string);
       _storage.regex = urlRegexp.toString();
     }
@@ -95,7 +96,7 @@
       _storage.samplingrate = 100;
       _storage.urls = {
         absolute: { "/": { type: "home" }, "/login": { type: "login" } },
-        match: { "another-app.vercel.app/": { regexp: 1, type: "pages" } },
+        match: { "/": { regexp: 1, type: "pages" } },
       };
     }
     if (
