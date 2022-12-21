@@ -76,10 +76,9 @@
     if (!_config.data.webvitals) {
       return type == "webvitals" ? 0 : 0;
     }
-    debugger
     if (1 && _storage.urls.absolute && !_config.page?.track) {
       _config.page = urlRegexp(_storage.urls, _beacon.url_string);
-      debugger
+      debugger;
       _storage.regex = urlRegexp.toString();
     }
     if (!_config.page) {
@@ -93,11 +92,15 @@
     return response;
   }
   function startSession() {
+    debugger
     if (!_storage.urls) {
       _storage.samplingrate = 100;
       _storage.urls = {
         absolute: { "/": { type: "home" } },
-        match: { "/": { regexp: 1, type: "pages" } },
+        match: {
+          "/": { regexp: 1, type: "pages" },
+          "/watch/see": { regexp: 1, type: "another-app" },
+        },
       };
     }
     if (
