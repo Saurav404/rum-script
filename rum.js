@@ -273,7 +273,6 @@
     return key ? null : _config.bf;
   }
   function set(key, value, table, force) {
-    debugger
     if (key.indexOf("cls_metric") === 0) {
       key = key.replace("cls_", "clsfloat_");
     }
@@ -752,6 +751,7 @@
     _config.data.callback && cb(_config.data.callback);
   }
   function throttleSend(evnt, callback) {
+    debugger
     if (evnt) {
       evnt.id = uuidv1();
       (evnt.when = Math.round(
