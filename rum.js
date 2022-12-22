@@ -192,7 +192,6 @@
     return result;
   }
   function collectTransferSize(pageload) {
-    debugger
     let startEnd = { start: -1, end: -1 };
     let data = {
       map: { prefix: "fcp", data: { renderblocking: {} } },
@@ -262,7 +261,6 @@
     }
   }
   function cb(func, arg) {
-    debugger
     (typeof func === "function" && func(arg)) ||
       (typeof func === "string" && ww[func](arg));
   }
@@ -358,7 +356,6 @@
     }
   }
   function loopQueue() {
-    debugger
     for (var d in _js.dataset) {
       _config.data[d.replace(/[\W_]+/g, "-")] = _js.dataset[d];
     }
@@ -476,11 +473,9 @@
     construct();
   }
   function snakeCase(str) {
-    debugger
     return str.replace(/([a-z])([A-Z])/g, "$1_$2").toLowerCase();
   }
   function copy(obj, append) {
-    debugger
     return Object.assign({}, obj, append);
   }
   function toStorage() {
@@ -720,7 +715,6 @@
       headers: headers,
       keepalive: true,
     });
-    console.log(data);
   }
 
   function construct(callback) {
@@ -729,7 +723,7 @@
     if (_storage.submitted) {
       tables.shift();
     }
-    debugger
+
     for (var i = 0; i < tables.length; i++) {
       var key = tables[i];
       _data[key].data = deleteEmpty(_data[key].data);
@@ -751,7 +745,6 @@
     _config.data.callback && cb(_config.data.callback);
   }
   function throttleSend(evnt, callback) {
-    debugger
     if (evnt) {
       evnt.id = uuidv1();
       (evnt.when = Math.round(
