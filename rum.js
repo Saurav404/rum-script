@@ -69,6 +69,7 @@
       : 0;
   _config.data.dnt = !0 && _dnt === 1;
   _config.page = _storage.page || {};
+
   function shouldTrack(type) {
     if (_config.data.dnt) {
       return false;
@@ -78,7 +79,6 @@
     }
     if (1 && _storage.urls.absolute && !_config.page?.track) {
       _config.page = urlRegexp(_storage.urls, _beacon.url_string);
-
       _storage.regex = urlRegexp.toString();
     }
     if (!_config.page) {
@@ -192,6 +192,7 @@
     return result;
   }
   function collectTransferSize(pageload) {
+    debugger
     let startEnd = { start: -1, end: -1 };
     let data = {
       map: { prefix: "fcp", data: { renderblocking: {} } },
@@ -261,6 +262,7 @@
     }
   }
   function cb(func, arg) {
+    debugger
     (typeof func === "function" && func(arg)) ||
       (typeof func === "string" && ww[func](arg));
   }
@@ -271,6 +273,7 @@
     return key ? null : _config.bf;
   }
   function set(key, value, table, force) {
+    debugger
     if (key.indexOf("cls_metric") === 0) {
       key = key.replace("cls_", "clsfloat_");
     }
@@ -473,9 +476,11 @@
     construct();
   }
   function snakeCase(str) {
+    debugger
     return str.replace(/([a-z])([A-Z])/g, "$1_$2").toLowerCase();
   }
   function copy(obj, append) {
+    debugger
     return Object.assign({}, obj, append);
   }
   function toStorage() {
