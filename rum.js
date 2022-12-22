@@ -359,6 +359,7 @@
     }
   }
   function loopQueue() {
+    debugger
     for (var d in _js.dataset) {
       _config.data[d.replace(/[\W_]+/g, "-")] = _js.dataset[d];
     }
@@ -729,6 +730,7 @@
     if (_storage.submitted) {
       tables.shift();
     }
+    debugger
     for (var i = 0; i < tables.length; i++) {
       var key = tables[i];
       _data[key].data = deleteEmpty(_data[key].data);
